@@ -1,0 +1,11 @@
+<div class="jumbotron text-center">
+ <h2>¡Bienvenidos a Instagram!</h2>
+ <% if user_signed_in? %>
+      # haz algo
+ <% else %>
+   <p>
+     <%= link_to "Iniciar sesión", new_user_session_path, class: "btn btn-default btn-lg" %>
+     <%= link_to "Regístrate", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+   </p>
+  <% end %>  
+</div>

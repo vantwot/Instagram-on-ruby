@@ -1,0 +1,22 @@
+<% if user_signed_in? %>
+  <div class="main-wrapper">
+    <div class="row">
+      <% @posts.each do |post| %>
+      <%= post.user.name if post.user %>
+        <div class="col-sm-4">
+          <div class="image center-block">
+            <%= link_to (image_tag post.image.url(:medium), class:'img-responsive'), post_path(post) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="jumbotron text-center">
+   <h1>¡Bienvenidos a Instagram!</h1>
+     <p>
+       <%= link_to "Iniciar sesión", new_user_session_path, class: "btn btn-default btn-lg" %>
+       <%= link_to "Regístrate", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+     </p>
+  </div>
+<% end %>

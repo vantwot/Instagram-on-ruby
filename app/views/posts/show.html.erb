@@ -1,0 +1,53 @@
+<div class="posts-wrapper">
+  <div class="post">
+    <div class="image center-block">
+      <%= image_tag @post.image.url(:medium), class:'img-responsive' %>
+    </div>
+    <div class="post-bottom">
+      <div class="description">
+        <div class="user-name">
+          <%= @post.user.name %>
+        </div>
+        <%= @post.description %>
+      </div>
+      <% if @post.comments %>
+        <% @post.comments.each do |comment| %>
+          <div class="comment">
+            <div class="user-name">
+              <%= comment.user.name %>
+            </div>
+            <div class="comment-content">
+              <%= comment.content %>
+            </div>
+            <% if comment.user == current_user %>
+              <%= link_to post_comment_path(@post, comment), method: :delete, data: { confirm: "¿Estás segura?" } do %>
+                <span class="glyphicon glyphicon-remove delete-comment"></span>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="comment-like-form row">
+      <div class="like-button col-sm-1">
+        <span class="glyphicon glyphicon-heart-empty"></span>
+      </div>
+      <div class="comment-form col-sm-11">
+        <%= form_for [@post, @post.comments.new] do |f| %>
+          <%= f.text_field :content, placeholder: 'Añade un comentario...' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% if @post.user.id == current_user.id %>
+  <div class="text-center edit-links">
+    <%= link_to "Cancelar", posts_path %>
+    |
+    <%= link_to "Editar el post", edit_post_path(@post) %>
+  </div>
+<% else %>
+  <div class="text-center edit-links">
+    <%= link_to "← Volver", posts_path %>
+  </div>
+<% end %>

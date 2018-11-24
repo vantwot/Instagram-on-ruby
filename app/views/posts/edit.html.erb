@@ -1,0 +1,13 @@
+<div class="text-center">
+  <%= image_tag @post.image.url(:medium) %>
+</div>
+<div class="form-wrapper">
+
+  <%= render 'form' %>
+
+</div>
+<div class="text-center edit-links">
+  <%= link_to "Borrar Post", post_path(@post), method: :delete, data: { confirm: "¿Estás segura que quieres eliminar este post?" } %>
+  |
+  <%= link_to "cancelar", posts_path %>
+</div>
